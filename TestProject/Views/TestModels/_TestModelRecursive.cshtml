@@ -1,0 +1,14 @@
+﻿@model TestProject.Models.TestModel
+
+<li>
+    <strong>@Model.Key:</strong> @Model.Value
+    @if (Model.Children != null && Model.Children.Any())
+    {
+        <ul>
+            @foreach (var child in Model.Children)
+            {
+                await Html.RenderPartialAsync("_TestModelRecursive", child);
+            }
+        </ul>
+    }
+</li>

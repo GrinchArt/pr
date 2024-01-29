@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TestProject.Models.TestModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+
+<form asp-controller="TestModels" asp-action="AddTestModelJsonFile" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="jsonFile">Choose JSON File:</label>
+        <input type="file" name="jsonFile" id="jsonFile" accept=".json" />
+    </div>
+    <button style="margin: 20px" type="submit">Upload and Add Model by Json File</button>
+</form>
+
+<form asp-controller="TestModels" asp-action="AddTestModelTextFile" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="textFile">Choose Text File:</label>
+        <input type="file" name="textFile" id="textFile" accept=".txt" />
+    </div>
+    <button style="margin: 20px" type="submit">Upload and Add Model by Text File</button>
+</form>
+
+
+<ul>
+    @foreach (var item in Model)
+    {
+        await Html.RenderPartialAsync("_TestModelRecursive", item);
+    }
+</ul>
